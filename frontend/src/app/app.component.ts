@@ -19,17 +19,11 @@ export class AppComponent {
   public async uploadImage(event: any) {
     const url = await this.getUploadUrl(this.file.name);
    
-    const data = new FormData();
-    data.append('file', this.file);
     let result = await fetch(url, {
       method: 'PUT',
       body: this.file,
     });
-    // result = await result.json();
-    // console.log(
-    //   '🚀 ~ file: app.component.ts ~ line 39 ~ AppComponent ~ uploadImage ~ result',
-    //   result
-    // );
+   
     const publicUrl = await this.getDownloadUrl(this.file.name);
     console.log("🚀 ~ file: app.component.ts ~ line 34 ~ AppComponent ~ uploadImage ~ publicUrl", publicUrl)
     this.downloadUrl = publicUrl;
