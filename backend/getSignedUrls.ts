@@ -2,12 +2,13 @@ import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import { s3Client } from "./client"; // Helper function that creates an Amazon S3 service client module.
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
+let fname =  `${Date.now()}_filename`;
 
 export async function createPutUrl(filenameToUpload: string): Promise<string> {
   // Create a command to put the object in the S3 bucket.
   const command = new PutObjectCommand({
     Bucket: process.env.S3_BUCKET_NAME,
-    Key: filenameToUpload,
+    Key: fname,
   });
   console.log("🚀 ~ file: index.ts ~ line 36 ~ run ~ command", command);
   // Create the presigned URL.
@@ -28,7 +29,7 @@ export async function getDownloadUrl(
   // Create a command to put the object in the S3 bucket.
   const command = new GetObjectCommand({
     Bucket: process.env.S3_BUCKET_NAME,
-    Key: filenameToUpload,
+    Key: fname
   });
   console.log(
     "🚀 ~ file: index.ts ~ line 36 ~ run ~ GetObjectCommand",
